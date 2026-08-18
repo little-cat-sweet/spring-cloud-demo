@@ -10,3 +10,7 @@ spring:
         server-addr: ${NACOS_ADDR:127.0.0.1:8848}
         username: ${NACOS_USERNAME:nacos}
         password: ${NACOS_PASSWORD:nacos}
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+        port: 8719
