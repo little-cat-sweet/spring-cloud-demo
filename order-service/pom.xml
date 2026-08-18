@@ -23,50 +23,40 @@
 
     <dependencies>
 
-
+        <!-- web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>
-                spring-boot-starter-web
-            </artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
 
-
-        <!-- nacos -->
+        <!-- nacos注册发现 -->
         <dependency>
-            <groupId>
-                com.alibaba.cloud
-            </groupId>
-            <artifactId>
-                spring-cloud-starter-alibaba-nacos-discovery
-            </artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-
 
 
         <!-- openfeign -->
         <dependency>
-            <groupId>
-                org.springframework.cloud
-            </groupId>
-            <artifactId>
-                spring-cloud-starter-openfeign
-            </artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
 
-
+        <!-- feign负载均衡 -->
         <dependency>
-            <groupId>
-                org.projectlombok
-            </groupId>
-            <artifactId>
-                lombok
-            </artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
 
 
     </dependencies>
