@@ -10,3 +10,15 @@ spring:
         server-addr: ${NACOS_ADDR:127.0.0.1:8848}
         username: ${NACOS_USERNAME:nacos}
         password: ${NACOS_PASSWORD:nacos}
+
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+    sentinel:
+      # 必须开启，负责采集feign调用指标、上报QPS、异常率
+      feign:
+        enabled: true
+      transport:
+        dashboard: localhost:8858
+        port: 8720

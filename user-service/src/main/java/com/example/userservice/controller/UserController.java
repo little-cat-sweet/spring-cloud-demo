@@ -13,21 +13,15 @@ public class UserController {
 
     @Value("${server.port}")
     private String port;
+
+    private int times;
     @GetMapping("/{id}")
-    @SentinelResource(
-            value = "getUser",
-            fallback = "fallback"
-    )
-    public String getUser(
-            @PathVariable("id") Long id
-    ) {
-
-        if(id == 1){
-            throw new RuntimeException();
+    public String getUser(@PathVariable("id") Long id) {
+        if (id == 1) {
+            System.out.println("times : " + times ++);
+            throw new RuntimeException("user service error");
         }
-
-
-        return "post is " + port + ", id is " + id;
+        return "...";
     }
 
     public String fallback(Long id, Throwable e){
