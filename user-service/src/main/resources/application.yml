@@ -6,6 +6,10 @@ spring:
     name: user-service
   cloud:
     nacos:
+      config:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
       discovery:
         server-addr: ${NACOS_ADDR:127.0.0.1:8848}
         username: ${NACOS_USERNAME:nacos}
@@ -14,3 +18,8 @@ spring:
       transport:
         dashboard: localhost:8858
         port: 8719
+
+  config:
+    import:
+      - optional:nacos:user-service.yaml
+

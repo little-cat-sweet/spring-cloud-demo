@@ -28,4 +28,18 @@ public class UserController {
 
         return "用户服务暂时不可用";
     }
+
+    @Value("${user.name}")
+    private String name;
+
+
+    @Value("${user.age}")
+    private Integer age;
+
+
+    @GetMapping("/config")
+    public String config(){
+
+        return name + ":" + age;
+    }
 }
