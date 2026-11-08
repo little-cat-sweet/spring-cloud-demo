@@ -34,6 +34,14 @@ spring:
     import:
       - optional:nacos:order-service.yaml
 
+# RocketMQ 生产者配置
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    # 同一个 group 的实例共享发送通道，生产环境按业务划分
+    group: order-producer-group
+    send-message-timeout: 3000
+
 logging:
   pattern:
     # traceId 由 micrometer-tracing 自动写入 MDC，代码里只写 log.info(...) 即可

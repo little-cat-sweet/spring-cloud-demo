@@ -42,6 +42,10 @@
         <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
 
 
+        <!-- RocketMQ（2.3.6 起支持 Spring Boot 3，依赖 spring-boot 的部分是 optional） -->
+        <rocketmq-spring.version>2.3.6</rocketmq-spring.version>
+
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     </properties>
@@ -103,10 +107,39 @@
             </dependency>
 
 
+            <!-- RocketMQ Spring Boot Starter -->
+            <dependency>
+
+                <groupId>org.apache.rocketmq</groupId>
+
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+
+                <version>${rocketmq-spring.version}</version>
+
+            </dependency>
+
+
         </dependencies>
 
     </dependencyManagement>
 
+
+
+    <!-- 各模块通用依赖 -->
+    <dependencies>
+
+        <!-- 测试：各模块 src/test 下的 *ApplicationTests 需要它，否则 mvn package 会在 testCompile 阶段失败 -->
+        <dependency>
+
+            <groupId>org.springframework.boot</groupId>
+
+            <artifactId>spring-boot-starter-test</artifactId>
+
+            <scope>test</scope>
+
+        </dependency>
+
+    </dependencies>
 
 
     <modules>
@@ -139,6 +172,10 @@
                 <configuration>
 
                     <release>17</release>
+
+                    <!-- 保留方法参数名：Spring MVC 靠它推断 @RequestParam/@PathVariable 的参数名。
+                         用了 spring-boot-starter-parent 时默认就带，这里没用 parent，所以要手动加。 -->
+                    <parameters>true</parameters>
 
                 </configuration>
 

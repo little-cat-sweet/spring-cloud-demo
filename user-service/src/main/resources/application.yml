@@ -28,6 +28,18 @@ spring:
     import:
       - optional:nacos:user-service.yaml
 
+  # Redis：消费幂等去重 + 积分暂存（第 7 步接入 MySQL 后，Redis 只负责去重）
+  # 用 db 3，和本地其他项目（打卡项目用 db 0）隔开
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      database: 3
+
+# RocketMQ 消费者只需要 name-server，消费组在 @RocketMQMessageListener 上声明
+rocketmq:
+  name-server: 127.0.0.1:9876
+
 logging:
   pattern:
     # traceId 由 micrometer-tracing 自动写入 MDC，代码里只写 log.info(...) 即可
