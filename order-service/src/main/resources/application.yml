@@ -1,6 +1,11 @@
 server:
   port: 8082
 
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
 spring:
   application:
     name: order-service
@@ -14,6 +19,8 @@ spring:
     openfeign:
       circuitbreaker:
         enabled: true
+      micrometer:
+        enabled: true
 
     sentinel:
       # 必须开启，负责采集feign调用指标、上报QPS、异常率
@@ -22,3 +29,12 @@ spring:
       transport:
         dashboard: localhost:8858
         port: 8720
+
+  config:
+    import:
+      - optional:nacos:order-service.yaml
+
+logging:
+  pattern:
+    # traceId 由 micrometer-tracing 自动写入 MDC，代码里只写 log.info(...) 即可
+    console: "%d{HH:mm:ss.SSS} traceId=[%X{traceId:-}] %5p [${spring.application.name:}] %logger{36} : %msg%n%wEx"

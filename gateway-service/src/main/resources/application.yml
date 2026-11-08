@@ -1,6 +1,11 @@
 server:
   port: 9000
 
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
 
 spring:
   application:
@@ -20,6 +25,13 @@ spring:
 
       routes:
 
+        - id: trace-demo-order-route
+          uri: lb://order-service
+          predicates:
+            - Path=/trace-demo/order/{id}
+          filters:
+            - RewritePath=/trace-demo/order/(?<id>[^/]+),/order/${id}
+
         - id: user-service-route
           uri: lb://user-service
           predicates:
@@ -34,6 +46,8 @@ spring:
 
 
 logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.cloud.loadbalancer: DEBUG

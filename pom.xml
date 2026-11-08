@@ -116,6 +116,7 @@
         <module>order-service</module>
 
         <module>user-service</module>
+        <module>user-service-2</module>
 
     </modules>
 
