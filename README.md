@@ -54,12 +54,15 @@ docker run --name sentinel -p 8858:8858 -d bladex/sentinel-dashboard
 - **配置内容**：
 
 ```yaml
-user:
-  name: Mark
-  age: 20
+demo:
+  user:
+    name: Mark
+    age: 20
 ```
 
 用户服务的 `/user/config` 接口会读取并返回配置内容。服务通过 `application.yml` 中的 `optional:nacos:user-service.yaml` 导入该配置。
+
+> ⚠️ 不要用 `user.name` 作为配置 key：它是 JVM 系统属性（默认值为操作系统用户名），优先级高于 Nacos 配置，会把配置中心的值静默覆盖掉（例如 Nacos 配的是 `Mark`，接口却返回 `chenhongyun`）。所以示例统一使用 `demo.user.*` 前缀，并在 `UserController` 上加了 `@RefreshScope`，改完 Nacos 配置无需重启即可生效。
 
 ## Sentinel 限流与降级
 
